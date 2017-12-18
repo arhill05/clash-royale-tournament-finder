@@ -1,0 +1,96 @@
+h1, h2, h3, .button {
+  font-family: 'Oswald';
+}
+
+body {
+  background-color: #e5e5e5;
+  color: #333;
+}
+
+.App {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+}
+
+.button {
+  display: block;
+  width: fit-content;
+  padding: 8px 24px;
+  margin: 16px;
+  font-size: 24px;
+}
+
+.button.button-primary {
+  background-color: #DBAD6A;
+  color: #f2f2f2;
+  border: none;
+  border-right: 3px solid #BF9558;
+  border-bottom: 3px solid #BF9558;
+  font-weight: bold;
+}
+
+.button.button-secondary {
+  background: none;
+  border: none;
+  color: #DBAD6A;
+  font-weight: bold;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  background-color: #628395;
+  height: 55vh;
+  padding: 20px;
+  color: #f2f2f2;
+  align-items: center;
+  box-shadow: 0px 6px 4px rgba(0,0,0,0.2);
+}
+
+.App-title {
+  font-size: 48px;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: -10vh;
+}
+
+.current-tournaments {
+  background-color: #f2f2f2;
+  width: 92%;
+  height: 100vh;
+  text-align: center;
+  box-shadow: 6px 6px 4px rgba(0,0,0,0.2);
+}
+
+.tournaments-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tournament {
+  flex-grow: 1;
+  width: 25%;
+  margin: 16px;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
