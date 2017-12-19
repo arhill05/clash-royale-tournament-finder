@@ -5,10 +5,11 @@ import { distanceInWords } from 'date-fns';
 const Tournament = ({tournament}) => {
     return (
         <div className="tournament">
-            <h1>{tournament.name}</h1>
-            <h2>Starts in {distanceInWordsToNow(tournament.startTime)}</h2>
+            <h2>{tournament.name}</h2>
+            <h3>{tournament.timeDescription}</h3>
             <p>{tournament.description}</p>
             <p>Password: {tournament.password}</p>
+            <p>Max Players: {tournament.maxPlayers}</p>
         </div>
     )
 }
