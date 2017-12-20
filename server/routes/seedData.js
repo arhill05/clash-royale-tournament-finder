@@ -52,6 +52,15 @@ const tournaments = [{
     password: '123456',
     timeDescription: null,
     maxPlayers: 50
+  },
+  {
+    name: 'Old Tournament',
+    startTime: addMinutes(Date.now(), -180),
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac tempus est. ' +
+      'Cras ac neque a odio ',
+    password: '123456',
+    timeDescription: null,
+    maxPlayers: 50
   }]
 
 router.get('/', (req, res, next) => {

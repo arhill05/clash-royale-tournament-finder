@@ -22,25 +22,43 @@ sortTournaments = (tournaments) => {
   })
 }
 
-handleTournamentDates = (tournaments) => {
-  tournaments.forEach(tournament => {
-    tournament.timeDescription = getTimeDescription(tournament.startTime);
+handleTournamentDates = async(tournaments) => {
+  let tournamentIdsToDelete = [];
+  tournaments.forEach((tournament, index) => {
+    if (addHours(tournament.startTime, 1) < Date.now()) {
+      tournamentIdsToDelete.push(tournament.id);
+      tournaments.splice(index, 1);
+    } else {
+      tournament.timeDescription = getTimeDescription(tournament.startTime);
+    }
   })
   tournaments = sortTournaments(tournaments);
+  let test = await Tournament.remove({
+    _id: {
+      $in: tournamentIdsToDelete
+    }
+  });
   return tournaments;
 }
 
 getLimitedTournaments = async(req, res) => {
-  let tournaments = await Tournament
-    .find()
-    .limit(Number(req.params.limit));
-  tournaments = handleTournamentDates(tournaments);
+  let tournaments = [];
+  const limit = Number(req.params.limit);
+  let count = null;
+  while (tournaments.length < limit && tournaments.length != count) {
+    count = await Tournament.count();
+    tournaments = await Tournament
+      .find()
+      .limit(limit);
+    tournaments = await handleTournamentDates(tournaments);
+  }
   res.json(tournaments);
 }
 
 getTournaments = async(req, res) => {
+  const count = await Tournament.count();
   let tournaments = await Tournament.find();
-  tournaments = handleTournamentDates(tournaments);
+  tournaments = await handleTournamentDates(tournaments);
   res.json(tournaments);
 }
 
@@ -54,7 +72,7 @@ createTournament = async(req, res) => {
 }
 
 router.get('/', getTournaments);
-router.get('/:limit', getLimitedTournaments);
+router.get('/limit/:limit', getLimitedTournaments);
 router.post('/', createTournament)
 
 module.exports = router;
