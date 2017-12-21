@@ -9,7 +9,9 @@ const isBefore = require('date-fns/is_before')
 
 getTimeDescription = (time) => {
   let response = '';
-  if (Date.now() < time) {
+  const now = Date.now();
+  const startTime = time.getTime();
+  if (isBefore(now, startTime)) {
     response = `Starts in ${distanceInWordsStrict(Date.now(), time)}`;
   } else {
     response = `Ends in ${distanceInWordsStrict(Date.now(), addHours(time, 1))}`
@@ -24,7 +26,7 @@ sortTournaments = (tournaments) => {
 }
 
 handleTournamentDates = async(tournaments) => {
-  const now = Date.now();
+  const now = new Date(Date.now());
   const tournamentIdsToDelete = tournaments.map(tournament => {
     const startPlusOne = addHours(tournament.startTime, 1);
     if (isBefore(startPlusOne, now)) {

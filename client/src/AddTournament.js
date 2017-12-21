@@ -28,7 +28,6 @@ class Add extends Component {
         let tournament = this.state.tournament;
         tournament[name] = value;
         this.setState({tournament});
-        console.log(this.state.tournament);
     }
 
     handleSubmit = async(event) => {

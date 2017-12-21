@@ -9,7 +9,7 @@ var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
 
-mongoose.connect('mongodb://localhost:27017/clash-royale-tourney-finder', {useMongoClient: true});
+mongoose.connect('mongodb://104.131.6.31:27017/clash-royale-tourney-finder', {useMongoClient: true});
 mongoose.connection.on('error', err => {
   console.error('MongoDB error: ' + err.message);
 })
