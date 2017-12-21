@@ -15,7 +15,7 @@ class Home extends Component {
     }
 
     async getStartingTournaments() {
-        const response = await fetch('tournaments/limit/6');
+        const response = await fetch('api/tournaments/limit/6');
         const tournaments = await response.json();
         this.setStateAsync({tournaments: tournaments})
     }

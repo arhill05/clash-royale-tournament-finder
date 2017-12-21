@@ -33,7 +33,7 @@ class Add extends Component {
 
     handleSubmit = async(event) => {
         event.preventDefault();
-        const response = await fetch('tournaments', {
+        const response = await fetch('api/tournaments', {
             method: 'post',
             body: JSON.stringify(this.state.tournament),
             headers: new Headers({

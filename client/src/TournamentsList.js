@@ -19,7 +19,7 @@ class TournamentList extends Component {
     }
 
     componentDidMount = async() => {
-        const tournamentsResponse = await fetch('tournaments');
+        const tournamentsResponse = await fetch('api/tournaments');
         const tournaments = await tournamentsResponse.json();
         this.setState({tournaments: tournaments});
     }

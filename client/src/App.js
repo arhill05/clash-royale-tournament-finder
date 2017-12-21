@@ -47,7 +47,7 @@ const Layout = () => (
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.NODE_ENV==='production' ? '/crtournamentfinder' : ''}>
         <Layout/>
       </BrowserRouter>
     );
