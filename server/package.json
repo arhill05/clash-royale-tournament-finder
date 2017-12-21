@@ -11,9 +11,11 @@
     "date-fns": "^1.29.0",
     "debug": "~2.6.9",
     "express": "~4.15.5",
+    "express-winston": "^2.4.0",
     "jade": "~1.11.0",
     "mongoose": "^4.13.7",
-    "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5"
+    "morgan": "^1.9.0",
+    "serve-favicon": "~2.4.5",
+    "winston": "^2.4.0"
   }
 }

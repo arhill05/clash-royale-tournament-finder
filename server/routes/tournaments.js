@@ -5,6 +5,7 @@ const Tournament = mongoose.model('Tournament');
 const addMinutes = require('date-fns/add_minutes');
 const addHours = require('date-fns/add_hours');
 const distanceInWordsStrict = require('date-fns/distance_in_words_strict');
+const isBefore = require('date-fns/is_before')
 
 getTimeDescription = (time) => {
   let response = '';
@@ -23,21 +24,22 @@ sortTournaments = (tournaments) => {
 }
 
 handleTournamentDates = async(tournaments) => {
-  let tournamentIdsToDelete = [];
-  tournaments.forEach((tournament, index) => {
-    if (addHours(tournament.startTime, 1) < Date.now()) {
-      tournamentIdsToDelete.push(tournament.id);
-      tournaments.splice(index, 1);
+  const now = Date.now();
+  const tournamentIdsToDelete = tournaments.map(tournament => {
+    const startPlusOne = addHours(tournament.startTime, 1);
+    if (isBefore(startPlusOne, now)) {
+      return tournament.id;
     } else {
       tournament.timeDescription = getTimeDescription(tournament.startTime);
     }
-  })
-  tournaments = sortTournaments(tournaments);
-  let test = await Tournament.remove({
+  });
+  tournaments = tournaments.filter(tournament => tournamentIdsToDelete.indexOf(tournament.id) < 0)
+  const removeResponse = await Tournament.remove({
     _id: {
       $in: tournamentIdsToDelete
     }
   });
+  tournaments = sortTournaments(tournaments);
   return tournaments;
 }
 
@@ -64,10 +66,11 @@ getTournaments = async(req, res) => {
 
 createTournament = async(req, res) => {
   try {
-    const tournament = await new Tournament(req.body).save();
-    res.send('successfully added tournament. ' + tournament.toString());
-  } catch (error) {
-    res.send('An error occured. ' + error.message);
+  const tournament = await new Tournament(req.body).save();
+  res.send('successfully added tournament. ' + tournament.toString());
+  } catch (err) {
+    res.status(500);
+    res.send('An error occurred while attempting to create a new tournament');
   }
 }
 

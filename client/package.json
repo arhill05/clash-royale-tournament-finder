@@ -6,7 +6,10 @@
     "date-fns": "^1.29.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
+    "sweetalert2": "^7.1.2",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
@@ -15,5 +18,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://localhost:3001/api"
 }

@@ -22,6 +22,7 @@ body {
   padding: 8px 24px;
   margin: 16px;
   font-size: 24px;
+  text-decoration: none;
 }
 
 .button.button-primary {
@@ -31,6 +32,10 @@ body {
   border-right: 3px solid #BF9558;
   border-bottom: 3px solid #BF9558;
   font-weight: bold;
+}
+
+.button.button-primary:active {
+  background-color: #BF9558;
 }
 
 .button.button-secondary {
@@ -69,14 +74,14 @@ body {
   font-size: large;
 }
 
-.content {
+.home {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   text-align: center;
   position: relative;
-  top: -10vh;
+  top: -12vh;
 }
 
 .current-tournaments {
@@ -108,5 +113,15 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .home {
+    top: -8vh;
+  }
+
+  .tournament {
+    width: 96%;
   }
 }
